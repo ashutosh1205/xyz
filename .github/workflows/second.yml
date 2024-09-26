@@ -1,6 +1,7 @@
-name: CI Workflow
+name: Node.js CI
 
-on: 
+# Triggers the workflow on push or pull request to the main branch
+on:
   push:
     branches:
       - main
@@ -10,19 +11,24 @@ on:
 
 jobs:
   build:
+    # Runs the job on the latest Ubuntu runner
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Check out the repository code
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Step 2: Set up Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '14'  # You can specify the Node.js version you need
 
+      # Step 3: Install dependencies using npm
       - name: Install dependencies
         run: npm install
 
+      # Step 4: Run the tests
       - name: Run tests
         run: npm test
